@@ -15,6 +15,35 @@
     </parent>
 
     <dependencies>
+        <!-- 单机限流（非响应式） 简单单机限流-->
+<!--        <dependency>-->
+<!--            <groupId>com.google.guava</groupId>-->
+<!--            <artifactId>guava</artifactId>-->
+<!--            <version>32.1.3-jre</version>-->
+<!--        </dependency>-->
+        <!-- 例如：Resilience4j 限流 熔断/限流一体化 微服务容错 -->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-circuitbreaker-reactor-resilience4j</artifactId>-->
+<!--        </dependency>-->
+
+        <!--官方支持的分布式限流 需要集群限流的场景 -->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-data-redis-reactive</artifactId>-->
+<!--        </dependency>-->
+
+        <!-- 示例：Bucket4j 实现的限流 基于令牌桶算法 高精度限流 -->
+<!--        <dependency>-->
+<!--            <groupId>com.github.vladimir-bukhtoyarov</groupId>-->
+<!--            <artifactId>bucket4j-core</artifactId>-->
+<!--            <version>7.6.0</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>org.isomorphism</groupId>
+            <artifactId>token-bucket</artifactId>
+            <version>1.7</version>
+        </dependency>
         <dependency>
             <groupId>com.macro.mall</groupId>
             <artifactId>mall-common</artifactId>
@@ -68,6 +97,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-commons</artifactId>
         </dependency>
     </dependencies>
 

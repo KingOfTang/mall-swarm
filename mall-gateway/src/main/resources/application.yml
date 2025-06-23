@@ -3,19 +3,25 @@ server:
 spring:
   mvc:
     pathmatch:
-      matching-strategy: ant_path_matcher
+      matching-strategy: ant_path_matcher #设置Spring MVC的路径匹配策略为Ant Path Matcher
   cloud:
     gateway:
       discovery:
         locator:
-          enabled: true
+          enabled: true #启用服务发现定位器
           lower-case-service-id: true #使用小写service-id
       routes: #配置路由路径
+        # 定义一个名为mall-auth的服务路由配置
         - id: mall-auth
+          # 指定服务的URI，使用负载均衡策略发现服务
           uri: lb://mall-auth
+          # 配置路由的断言，用于匹配请求路径
           predicates:
+            # 匹配以/mall-auth/开头的请求路径
             - Path=/mall-auth/**
+          # 定义应用于该路由的过滤器
           filters:
+            # 移除请求路径的第一个路径段
             - StripPrefix=1
         - id: mall-admin
           uri: lb://mall-admin
@@ -46,10 +52,15 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: 'http://localhost:8201/mall-auth/rsa/publicKey' #配置RSA的公钥访问地址
+  # 配置Redis数据库的连接信息
   redis:
+    # 指定使用的数据库索引，默认为0
     database: 0
+    # 指定Redis服务器的端口号，默认为6379
     port: 6379
-    host: localhost
+    # 指定Redis服务器的主机名或IP地址，此处为本地主机
+    host: 1.94.101.193
+    # 指定连接Redis服务器所需的密码，此处为空表示无密码访问
     password:
 secure:
   ignore:
@@ -74,13 +85,14 @@ secure:
       - "/mall-portal/product/**"
       - "/mall-portal/brand/**"
       - "/mall-admin/admin/login"
+#      - "/mall-admin/admin/info"
       - "/mall-admin/admin/register"
       - "/mall-admin/minio/upload"
 management: #开启SpringBoot Admin的监控
   endpoints:
     web:
       exposure:
-        include: '*'
+        include: '*' #暴露所有监控端点
   endpoint:
     health:
-      show-details: always
+      show-details: always #总是显示健康检查详情
