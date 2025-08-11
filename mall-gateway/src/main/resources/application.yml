@@ -1,3 +1,14 @@
+#  该YAML配置文件用于Spring Cloud Gateway网关服务，主要实现如下功能：
+#
+#    1. **服务路由**：将请求路径如`/mall-auth/**`转发到对应微服务（如`mall-auth`），并去除第一级路径。
+#    2. **服务发现**：启用服务发现定位器，支持通过服务名进行负载均衡。
+#    3. **安全配置**：
+#    - 忽略部分路径的安全校验（如接口文档、静态资源、认证相关接口等）。
+#    - 配置JWT资源服务器的公钥地址。
+#    4. **Redis连接**：配置本地Redis数据库连接信息。
+#    5. **监控管理**：开启所有Actuator端点，便于监控和管理应用。
+
+
 server:
   port: 8201
 spring:
@@ -62,6 +73,11 @@ spring:
     host: 1.94.101.193
     # 指定连接Redis服务器所需的密码，此处为空表示无密码访问
     password:
+    timeout: 5000  # 增加超时时间
+    lettuce:
+        pool:
+          max-active: 50
+          test-while-idle: true  # 启用空闲检测
 secure:
   ignore:
     urls: #配置白名单路径
@@ -96,3 +112,8 @@ management: #开启SpringBoot Admin的监控
   endpoint:
     health:
       show-details: always #总是显示健康检查详情
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG  # 网关路由日志
+    org.springframework.security: ERROR      # 避免安全日志干扰
+    reactor.netty.http: WARN                 # 网络层日志控制

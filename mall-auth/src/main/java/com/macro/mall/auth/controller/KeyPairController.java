@@ -14,7 +14,15 @@ import java.util.Map;
 
 /**
  * 获取RSA公钥接口
- * Created by macro on 2020/6/19.
+ * 该代码实现了一个Spring Boot控制器，用于提供RSA公钥信息。其功能如下：
+ *
+ * - 通过`/rsa/publicKey` GET接口获取RSA公钥；
+ * - 将公钥封装为JWT JWK格式（JSON Web Key）并以JSON形式返回。
+ *
+ * 简要流程：
+ * 1. 从Spring注入的`KeyPair`中获取公钥；
+ * 2. 使用Nimbus JOSE库构建JWK对象；
+ * 3. 转换为JSON响应返回给客户端。
  */
 @RestController
 @Api(tags = "KeyPairController", description = "获取RSA公钥接口")

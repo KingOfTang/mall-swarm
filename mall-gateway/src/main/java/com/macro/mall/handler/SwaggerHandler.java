@@ -12,7 +12,13 @@ import java.util.Optional;
 
 /**
  * 自定义Swagger的各个配置节点
- * Created by macro on 2020/7/9.
+ * 该Java代码定义了一个用于自定义Swagger配置的Spring Boot控制器，主要功能如下：
+ *
+ * 1. **`/swagger-resources/configuration/security`**：返回Swagger的安全配置（如OAuth、API Key），若未配置则使用默认值。
+ * 2. **`/swagger-resources/configuration/ui`**：返回Swagger UI界面的配置信息，若未配置则使用默认值。
+ * 3. **`/swagger-resources`**：返回所有微服务的Swagger API文档资源列表。
+ *
+ * 整体作用是为多服务架构下的Swagger UI提供聚合展示所需的配置和资源信息。
  */
 @RestController
 public class SwaggerHandler {

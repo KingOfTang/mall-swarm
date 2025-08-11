@@ -8,7 +8,12 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 /**
- * Created by macro on 2019/9/30.
+ * 该Java代码用于配置Spring Security的安全策略，主要功能如下：
+ *
+ * 1. 允许静态资源和登录页公开访问；
+ * 2. 配置登录页面路径及认证成功后的跳转逻辑；
+ * 3. 启用HTTP Basic认证，便于客户端注册；
+ * 4. 使用Cookie存储CSRF Token，并对部分API路径禁用CSRF保护。
  */
 @Configuration
 public class SecuritySecureConfig extends WebSecurityConfigurerAdapter {

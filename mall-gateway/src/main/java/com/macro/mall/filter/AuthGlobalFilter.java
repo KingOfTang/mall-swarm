@@ -17,30 +17,56 @@ import java.text.ParseException;
 
 /**
  * 将登录用户的JWT转化成用户信息的全局过滤器
- * Created by macro on 2020/6/17.
+ * 该Java代码实现了一个Spring Cloud Gateway的全局过滤器[AuthGlobalFilter]，其功能如下：
+ *
+ * 1. **从请求头中提取JWT令牌**；
+ * 2. **解析JWT令牌并获取用户信息**；
+ * 3. **将用户信息以新的请求头形式加入HTTP请求**，供后续服务使用；
+ * 4. **若无令牌或解析失败，则直接放行请求**。
+ *
+ * 该过滤器优先级为0，确保在请求处理链中最早执行。
  */
 @Component
 public class AuthGlobalFilter implements GlobalFilter, Ordered {
 
     private static Logger LOGGER = LoggerFactory.getLogger(AuthGlobalFilter.class);
 
+    /**
+     * 自定义网关过滤器，用于处理每个请求
+     * 此过滤器的主要作用是检查请求中是否包含有效的JWT令牌，并从中提取用户信息
+     * 如果请求中没有令牌或者令牌解析失败，则不做任何处理，直接放行请求
+     * 如果令牌解析成功，则将用户信息添加到请求头中，以便下游服务使用
+     *
+     * @param exchange 服务器Web交换对象，包含请求和响应的所有信息
+     * @param chain 网关过滤器链，用于执行下一个过滤器或最终的路由处理
+     * @return 返回一个Mono<Void>，表示过滤器处理完成，请求可以继续进行
+     */
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        // 从请求头中获取JWT令牌
         String token = exchange.getRequest().getHeaders().getFirst(AuthConstant.JWT_TOKEN_HEADER);
+        // 如果令牌为空，则直接放行请求
         if (StrUtil.isEmpty(token)) {
             return chain.filter(exchange);
         }
         try {
-            //从token中解析用户信息并设置到Header中去
+            // 移除令牌前缀，获取真实的令牌字符串
             String realToken = token.replace(AuthConstant.JWT_TOKEN_PREFIX, "");
+            // 解析JWT令牌
             JWSObject jwsObject = JWSObject.parse(realToken);
+            // 获取令牌中的用户信息
             String userStr = jwsObject.getPayload().toString();
+            // 记录用户信息日志
             LOGGER.info("AuthGlobalFilter.filter() user:{}",userStr);
+            // 将用户信息添加到请求头中
             ServerHttpRequest request = exchange.getRequest().mutate().header(AuthConstant.USER_TOKEN_HEADER, userStr).build();
+            // 更新交换对象，以包含新的请求头
             exchange = exchange.mutate().request(request).build();
         } catch (ParseException e) {
+            // 如果令牌解析失败，则打印异常信息
             e.printStackTrace();
         }
+        // 继续处理下一个过滤器或最终的路由处理
         return chain.filter(exchange);
     }
 

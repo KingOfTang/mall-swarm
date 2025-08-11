@@ -12,7 +12,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * SpringSecurity配置
- * Created by macro on 2020/6/19.
+ * 该Java代码用于配置Swagger API文档，功能如下：
+ *
+ * - 使用`@Configuration`和`@EnableSwagger2`启用Swagger2文档生成。
+ * - 继承[BaseSwaggerConfig]并重写[swaggerProperties()]方法，定义了API的基础包路径、标题、描述、作者、版本及是否启用安全等属性。
+ * - 通过`BeanPostProcessor`对Swagger的处理器进行后置处理，增强其功能。
  */
 @Configuration
 @EnableWebSecurity

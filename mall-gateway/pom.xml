@@ -15,45 +15,26 @@
     </parent>
 
     <dependencies>
-        <!-- 单机限流（非响应式） 简单单机限流-->
-<!--        <dependency>-->
-<!--            <groupId>com.google.guava</groupId>-->
-<!--            <artifactId>guava</artifactId>-->
-<!--            <version>32.1.3-jre</version>-->
-<!--        </dependency>-->
-        <!-- 例如：Resilience4j 限流 熔断/限流一体化 微服务容错 -->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-circuitbreaker-reactor-resilience4j</artifactId>-->
-<!--        </dependency>-->
-
-        <!--官方支持的分布式限流 需要集群限流的场景 -->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-data-redis-reactive</artifactId>-->
-<!--        </dependency>-->
-
-        <!-- 示例：Bucket4j 实现的限流 基于令牌桶算法 高精度限流 -->
-<!--        <dependency>-->
-<!--            <groupId>com.github.vladimir-bukhtoyarov</groupId>-->
-<!--            <artifactId>bucket4j-core</artifactId>-->
-<!--            <version>7.6.0</version>-->
-<!--        </dependency>-->
+        <!-- 定义一个Maven依赖项 -->
         <dependency>
-            <groupId>org.isomorphism</groupId>
-            <artifactId>token-bucket</artifactId>
-            <version>1.7</version>
-        </dependency>
-        <dependency>
+            <!-- 指定依赖项的groupId -->
             <groupId>com.macro.mall</groupId>
+            <!-- 指定依赖项的artifactId -->
             <artifactId>mall-common</artifactId>
+            <!-- 配置依赖项的排除列表，用于排除某些传递性依赖 -->
             <exclusions>
+                <!-- 排除第一个依赖项 -->
                 <exclusion>
+                    <!-- 指定要排除的依赖项的groupId -->
                     <groupId>org.springframework.boot</groupId>
+                    <!-- 指定要排除的依赖项的artifactId -->
                     <artifactId>spring-boot-starter-web</artifactId>
                 </exclusion>
+                <!-- 排除第二个依赖项 -->
                 <exclusion>
+                    <!-- 指定要排除的依赖项的groupId -->
                     <groupId>com.github.xiaoymin</groupId>
+                    <!-- 指定要排除的依赖项的artifactId -->
                     <artifactId>knife4j-micro-spring-boot-starter</artifactId>
                 </exclusion>
             </exclusions>
@@ -99,8 +80,15 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-commons</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--Hutool Java工具包-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
         </dependency>
     </dependencies>
 
