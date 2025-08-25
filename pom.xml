@@ -37,7 +37,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <skipTests>true</skipTests>
-        <docker.host>http://192.168.3.105:2375</docker.host>
+        <!-- Docker主机地址配置 -->
+        <!-- 用于指定Docker守护进程的访问地址 -->
+        <!-- 格式：http://主机IP:端口号 -->
+        <!-- 端口号2375为Docker默认的非安全访问端口 -->
+<!--        <docker.host>http://192.168.3.105:2375</docker.host>-->
+        <docker.host>http://localhost:2375</docker.host>
+<!--        <docker.host>tcp://localhost:2375</docker.host>-->
         <docker.maven.plugin.version>0.40.0</docker.maven.plugin.version>
         <java.version>1.8</java.version>
         <spring-boot.version>2.7.0</spring-boot.version>
