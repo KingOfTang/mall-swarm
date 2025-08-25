@@ -24,7 +24,25 @@ import java.util.List;
 
 /**
  * 认证服务器配置
- * Created by macro on 2020/6/19.
+ * 该Java代码用于配置OAuth2认证服务器，主要功能如下：
+ *
+ * 1. **客户端配置**：[configure(ClientDetailsServiceConfigurer clients)]
+ *    配置了两个内存中的客户端（`admin-app` 和 `portal-app`），设置其客户端密钥、授权范围、授权类型及令牌有效期。
+ *
+ * 2. **端点配置**：[configure(AuthorizationServerEndpointsConfigurer endpoints)]
+ *    设置认证流程的核心参数，包括认证管理器、用户详情服务、JWT令牌转换器和令牌增强链。
+ *
+ * 3. **安全配置**：[configure(AuthorizationServerSecurityConfigurer security)]
+ *    允许通过表单认证客户端（即支持客户端使用表单提交认证）。
+ *
+ * 4. **JWT令牌配置**：
+ *    - [accessTokenConverter()]创建了一个 `JwtAccessTokenConverter`，并绑定密钥对以支持JWT签名与解析。
+ *    - [keyPair()] 从classpath下的 [jwt.jks] 证书文件中加载密钥对。
+ *
+ * 5. **依赖注入**：
+ *    使用 Lombok 的 `@AllArgsConstructor` 自动生成构造函数，注入所需的组件如 `PasswordEncoder`、[UserServiceImpl] 等。
+ *
+ * 总结：该类实现了基于 JWT 的 OAuth2 授权服务器配置，支持密码模式和刷新令牌机制。
  */
 @AllArgsConstructor
 @Configuration

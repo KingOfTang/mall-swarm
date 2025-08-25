@@ -1,8 +1,14 @@
+# 配置Spring Cloud应用的Nacos相关属性
 spring:
   cloud:
     nacos:
+      # 配置Nacos服务发现的相关属性
       discovery:
+        # 指定Nacos服务器的地址，用于服务发现和注册
         server-addr: http://nacos-registry:8848
+      # 配置Nacos配置管理的相关属性
       config:
+        # 指定Nacos服务器的地址，用于获取配置信息
         server-addr: http://nacos-registry:8848
+        # 指定配置文件的扩展名，这里设置为yaml，影响配置信息的解析方式
         file-extension: yaml

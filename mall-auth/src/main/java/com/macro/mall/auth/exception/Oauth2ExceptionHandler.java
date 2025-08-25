@@ -8,7 +8,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 全局处理Oauth2抛出的异常
- * Created by macro on 2020/7/17.
+ * 该代码定义了一个全局异常处理器，用于捕获并处理 Spring Security OAuth2 抛出的 `OAuth2Exception` 异常。其功能如下：
+ *
+ * - 使用 `@ControllerAdvice` 注解对所有控制器进行全局异常拦截；
+ * - 通过 `@ExceptionHandler` 拦截 `OAuth2Exception` 类型的异常；
+ * - 使用 `@ResponseBody` 将返回值直接作为响应体；
+ * - 异常处理方法 [handleOauth2] 返回统一格式的失败结果 [CommonResult.failed(e.getMessage())]。
  */
 @ControllerAdvice
 public class Oauth2ExceptionHandler {

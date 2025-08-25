@@ -20,7 +20,14 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * 用户管理业务类
- * Created by macro on 2020/6/19.
+ * 该代码实现了Spring Security的`UserDetailsService`接口，用于根据用户名加载用户信息。其主要功能如下：
+ *
+ * 1. 根据请求中的`client_id`参数判断是管理端还是会员端登录；
+ * 2. 调用对应的服务（[UmsAdminService]或[UmsMemberService]）加载用户信息；
+ * 3. 若用户不存在，抛出`UsernameNotFoundException`；
+ * 4. 设置用户所属客户端ID；
+ * 5. 校验用户状态（是否启用、未锁定、未过期等），如不满足则抛出相应异常；
+ * 6. 返回封装后的[SecurityUser]对象作为认证信息。
  */
 @Service
 public class UserServiceImpl implements UserDetailsService {

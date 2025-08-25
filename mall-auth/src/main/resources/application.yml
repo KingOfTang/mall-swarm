@@ -1,21 +1,33 @@
-
+# 配置服务器监听端口
 server:
   port: 8401
+
+# Spring MVC相关配置
 spring:
   mvc:
     pathmatch:
+      # 设置路径匹配策略为Ant风格
       matching-strategy: ant_path_matcher
+
+# 管理端点配置
 management:
   endpoints:
     web:
+      # 暴露所有管理端点
       exposure:
         include: "*"
+
+# Feign客户端配置
 feign:
   okhttp:
+    # 启用OkHttp客户端
     enabled: true
   client:
     config:
       default:
+        # 连接超时时间（毫秒）
         connectTimeout: 5000
+        # 读取超时时间（毫秒）
         readTimeout: 5000
+        # 日志级别设置为基本级别
         loggerLevel: basic

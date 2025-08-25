@@ -1,5 +1,7 @@
+# 设置Spring Profiles活动配置文件为开发环境(dev)
 spring:
   profiles:
     active: dev
+  # 定义应用程序的名称为mall-auth
   application:
     name: mall-auth

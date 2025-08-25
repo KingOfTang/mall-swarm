@@ -21,11 +21,16 @@
         <module>mall-auth</module>
     </modules>
 
+    <!-- 定义项目父级依赖 -->
     <parent>
+        <!-- 父项目的groupId，即项目组织唯一的标识符 -->
         <groupId>org.springframework.boot</groupId>
+        <!-- 父项目的artifactId，即该组织下项目的唯一标识符 -->
         <artifactId>spring-boot-starter-parent</artifactId>
+        <!-- 父项目的版本，这里使用的是Spring Boot 2.7.0版本 -->
         <version>2.7.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <!-- 相对路径，留空表示使用Maven默认的查找路径 -->
+        <relativePath/>
     </parent>
 
     <properties>
@@ -59,6 +64,12 @@
     </properties>
 
     <dependencies>
+        <!--
+            引入Spring Boot Actuator依赖模块
+            Spring Boot Actuator提供了生产环境中对应用系统的监控和管理功能
+            它可以提供应用的健康状况、度量指标、环境变量等信息，有助于运维团队更好地管理应用
+            该依赖无需额外配置，即可为Spring Boot应用添加Actuator端点
+        -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
@@ -72,17 +83,26 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- 项目依赖项配置 -->
         <dependency>
+            <!-- Hutool库依赖项 -->
+            <!-- 用于提供简洁的API封装，简化Java开发过程中的常见操作 -->
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
         </dependency>
         <dependency>
+            <!-- Lombok库依赖项 -->
+            <!-- 用于减少Java代码的冗余，通过注解自动生成getter、setter等 -->
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        <!-- 这个依赖项用于Spring Boot配置处理 -->
         <dependency>
+            <!-- 定义依赖项的组ID -->
             <groupId>org.springframework.boot</groupId>
+            <!-- 定义依赖项的工件ID -->
             <artifactId>spring-boot-configuration-processor</artifactId>
+            <!-- 设置依赖项为可选，这意味着它不会自动传递到依赖于此项目的其他项目 -->
             <optional>true</optional>
         </dependency>
     </dependencies>

@@ -15,16 +15,26 @@
     </parent>
 
     <dependencies>
+        <!-- 定义一个Maven依赖项 -->
         <dependency>
+            <!-- 指定依赖项的groupId -->
             <groupId>com.macro.mall</groupId>
+            <!-- 指定依赖项的artifactId -->
             <artifactId>mall-common</artifactId>
+            <!-- 配置依赖项的排除列表，用于排除某些传递性依赖 -->
             <exclusions>
+                <!-- 排除第一个依赖项 -->
                 <exclusion>
+                    <!-- 指定要排除的依赖项的groupId -->
                     <groupId>org.springframework.boot</groupId>
+                    <!-- 指定要排除的依赖项的artifactId -->
                     <artifactId>spring-boot-starter-web</artifactId>
                 </exclusion>
+                <!-- 排除第二个依赖项 -->
                 <exclusion>
+                    <!-- 指定要排除的依赖项的groupId -->
                     <groupId>com.github.xiaoymin</groupId>
+                    <!-- 指定要排除的依赖项的artifactId -->
                     <artifactId>knife4j-micro-spring-boot-starter</artifactId>
                 </exclusion>
             </exclusions>
@@ -68,6 +78,17 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--Hutool Java工具包-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
         </dependency>
     </dependencies>
 
