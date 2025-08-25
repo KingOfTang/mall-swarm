@@ -59,7 +59,8 @@ services:
     environment:
       - TZ=Asia/Shanghai
     volumes:
-      - /mydata/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf #挂载logstash的配置文件
+#      - /mydata/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf #挂载logstash的配置文件
+      - /mydata/logstash:/usr/share/logstash/pipeline # 挂载整个pipeline目录
     depends_on:
       - elasticsearch #kibana在elasticsearch启动之后再启动
     links:
