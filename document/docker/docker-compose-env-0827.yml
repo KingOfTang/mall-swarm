@@ -60,23 +60,7 @@ services:
       timeout: 10s
       retries: 3
     # --- 添加到这里结束 ---
-#  logstash:
-#    image: logstash:7.17.3
-#    container_name: logstash
-#    environment:
-#      - TZ=Asia/Shanghai
-#    volumes:
-##      - /mydata/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf #挂载logstash的配置文件
-#      - /mydata/logstash:/usr/share/logstash/pipeline # 挂载整个pipeline目录
-#    depends_on:
-#      - elasticsearch #kibana在elasticsearch启动之后再启动
-#    links:
-#      - elasticsearch:es #可以用es这个域名访问elasticsearch服务
-#    ports:
-#      - 4560:4560
-#      - 4561:4561
-#      - 4562:4562
-#      - 4563:4563
+
 
   logstash:
     image: logstash:7.17.3
@@ -93,17 +77,6 @@ services:
       - elasticsearch:es #可以用es这个域名访问elasticsearch服务
     ports:
       - 4560:4560
-#  kibana:
-#    image: kibana:7.17.3
-#    container_name: kibana
-#    links:
-#      - elasticsearch:es #可以用es这个域名访问elasticsearch服务
-#    depends_on:
-#      - elasticsearch #kibana在elasticsearch启动之后再启动
-#    environment:
-#      - "elasticsearch.hosts=http://es:9200" #设置访问elasticsearch的地址
-#    ports:
-#      - 5601:5601
 
   kibana:
     image: kibana:7.17.3
