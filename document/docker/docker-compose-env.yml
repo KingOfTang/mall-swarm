@@ -25,7 +25,8 @@ services:
     image: nginx:1.22
     container_name: nginx
     volumes:
-      - /mydata/nginx/conf:/etc/nginx #配置文件挂载
+#      - /mydata/nginx/conf:/etc/nginx #配置文件挂载
+      - /mydata/nginx/conf/conf.d:/etc/nginx/conf.d # 只挂载 conf.d 目录
       - /mydata/nginx/html:/usr/share/nginx/html #静态资源根目录挂载
       - /mydata/nginx/log:/var/log/nginx #日志文件挂载
     ports:
