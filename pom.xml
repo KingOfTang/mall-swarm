@@ -265,7 +265,8 @@
                     </executions>
                     <configuration>
                         <!-- Docker 远程管理地址-->
-                        <dockerHost>${docker.host}</dockerHost>
+<!--                        <dockerHost>${docker.host}</dockerHost>-->
+                        <dockerHost>unix:///var/run/docker.sock</dockerHost>
                         <images>
                             <image>
                                 <!--定义镜像名称-->
