@@ -23,7 +23,8 @@ spring:
       repositories:
         enabled: true
   elasticsearch:
-    uris: localhost:9200
+#    uris: localhost:9200
+    uris: es:9200
 mybatis:
   mapper-locations:
     - classpath:dao/*.xml
