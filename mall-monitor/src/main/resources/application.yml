@@ -17,6 +17,7 @@ spring:
       discovery:
         ignored-services: ${spring.application.name}
   profiles:
-    active: dev
+#    active: dev
+    active: prod
 server:
   port: 8101

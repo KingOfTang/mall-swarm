@@ -29,19 +29,22 @@ spring:
     # MongoDB配置子块，包含连接MongoDB数据库所需的信息
     mongodb:
       # MongoDB主机地址，此处为本地主机
-      host: localhost
+#      host: localhost
+      host: mongo
       # MongoDB端口号，标准MongoDB端口为27017
       port: 27017
       # 要连接的数据库名称
       database: mall-port
   redis:
-    host: localhost # Redis服务器地址
+#    host: localhost # Redis服务器地址
+    host: redis # Redis服务器地址
     database: 0 # Redis数据库索引（默认为0）
     port: 6379 # Redis服务器连接端口
     password:  # Redis服务器连接密码（默认为空）
     timeout: 3000ms # 连接超时时间（毫秒）
   rabbitmq:
-    host: localhost
+#    host: localhost
+    host: rabbit
     port: 5672
     virtual-host: /mall
     username: mall

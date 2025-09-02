@@ -1,5 +1,6 @@
 spring:
   profiles:
-    active: dev
+#    active: dev
+    active: prod
   application:
     name: mall-gateway

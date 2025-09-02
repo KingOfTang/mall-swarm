@@ -70,7 +70,8 @@ spring:
     # 指定Redis服务器的端口号，默认为6379
     port: 6379
     # 指定Redis服务器的主机名或IP地址，此处为本地主机
-    host: localhost
+#    host: localhost
+    host: redis
     # 指定连接Redis服务器所需的密码，此处为空表示无密码访问
     password:
     timeout: 5000  # 增加超时时间
