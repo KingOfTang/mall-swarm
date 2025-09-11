@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+      这是一个标准的 MyBatis XML 映射文件头。
+       它的作用是：
+       1.  **声明文件类型**：告诉解析器这是一个 XML 文件。
+       2.  **定义文件结构**：通过 `DOCTYPE` 声明，引用了 MyBatis 的 DTD（文档类型定义）文件。
+       这个 DTD 文件定义了 `<mapper>`、`<select>` 等所有 MyBatis 标签的合法结构和用法。
+       简单来说，这部分代码就像一个**使用说明书**，它告诉你的程序：“嘿，这是一个 MyBatis 配置文件，
+   你必须按照 MyBatis 的规则来解析它。”
+   -->
 <mapper namespace="com.macro.mall.dao.CmsPrefrenceAreaProductRelationDao">
+   <!--
+       批量插入优选专区商品关联记录
+       @param list 优选专区商品关联对象列表，包含优选专区ID和商品ID
+       @return 插入记录数
+   -->
     <insert id="insertList">
+        <!-- 批量插入优选专区商品关联数据 -->
         insert into cms_prefrence_area_product_relation (prefrence_area_id, product_id) values
         <foreach collection="list" item="item" separator="," index="index">
             (#{item.prefrenceAreaId,jdbcType=BIGINT},
