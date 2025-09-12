@@ -37,6 +37,11 @@ services:
     volumes:
       - /mydata/rabbitmq/data:/var/lib/rabbitmq #数据文件挂载
       - /mydata/rabbitmq/log:/var/log/rabbitmq #日志文件挂载
+    environment:
+      # 这里定义了 RabbitMQ 的默认用户名
+      - RABBITMQ_DEFAULT_USER=mall
+      # 这里定义了 RabbitMQ 的默认密码
+      - RABBITMQ_DEFAULT_PASS=mall
     ports:
       - 5672:5672
       - 15672:15672
