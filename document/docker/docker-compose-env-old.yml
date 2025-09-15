@@ -25,7 +25,8 @@ services:
     image: nginx:1.22
     container_name: nginx
     volumes:
-      - /mydata/nginx/conf:/etc/nginx #配置文件挂载
+      - /mydata/nginx/conf/nginx.conf:/etc/nginx/nginx.conf
+      - /mydata/nginx/conf/conf.d:/etc/nginx/conf.d # 只挂载 conf.d 目录
       - /mydata/nginx/html:/usr/share/nginx/html #静态资源根目录挂载
       - /mydata/nginx/log:/var/log/nginx #日志文件挂载
     ports:
@@ -36,6 +37,11 @@ services:
     volumes:
       - /mydata/rabbitmq/data:/var/lib/rabbitmq #数据文件挂载
       - /mydata/rabbitmq/log:/var/log/rabbitmq #日志文件挂载
+    environment:
+      # 这里定义了 RabbitMQ 的默认用户名
+      - RABBITMQ_DEFAULT_USER=mall
+      # 这里定义了 RabbitMQ 的默认密码
+      - RABBITMQ_DEFAULT_PASS=mall
     ports:
       - 5672:5672
       - 15672:15672
@@ -53,40 +59,29 @@ services:
     ports:
       - 9200:9200
       - 9300:9300
-    # --- 从这里开始添加 ---
-    healthcheck:
-      test: ["CMD-SHELL", "curl -s --fail http://localhost:9200/_cluster/health?wait_for_status=yellow&timeout=5s || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-    # --- 添加到这里结束 ---
-
-
   logstash:
     image: logstash:7.17.3
     container_name: logstash
-    restart: always # 建议加上，保证服务稳定性
     environment:
       - TZ=Asia/Shanghai
     volumes:
-      - /mydata/logstash:/usr/share/logstash/pipeline # 挂载整个pipeline目录
-    depends_on: # <-- 注意这里的变化！
-      elasticsearch:
-        condition: service_healthy
+      - /mydata/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf #挂载logstash的配置文件
+    depends_on:
+      - elasticsearch #kibana在elasticsearch启动之后再启动
     links:
       - elasticsearch:es #可以用es这个域名访问elasticsearch服务
     ports:
       - 4560:4560
-
+      - 4561:4561
+      - 4562:4562
+      - 4563:4563
   kibana:
     image: kibana:7.17.3
     container_name: kibana
-    restart: always # 建议加上
     links:
       - elasticsearch:es #可以用es这个域名访问elasticsearch服务
-    depends_on: # <-- 注意这里的变化！
-      elasticsearch:
-        condition: service_healthy
+    depends_on:
+      - elasticsearch #kibana在elasticsearch启动之后再启动
     environment:
       - "elasticsearch.hosts=http://es:9200" #设置访问elasticsearch的地址
     ports:
