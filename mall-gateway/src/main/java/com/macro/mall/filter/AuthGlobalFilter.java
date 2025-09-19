@@ -46,6 +46,9 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
         // 从请求头中获取JWT令牌
         String token = exchange.getRequest().getHeaders().getFirst(AuthConstant.JWT_TOKEN_HEADER);
         // 如果令牌为空，则直接放行请求
+        // 1、支持匿名访问：系统中存在一些不需要登录就能访问的接口，如登录、注册、首页展示等公开接口
+        // 2、避免误拦截：对于没有携带token的请求，不进行认证处理，让后续的鉴权管理器(AuthorizationManager)来判断是否需要权限验证
+        // 3、职责分离：该过滤器主要负责解析和传递用户信息，而不是进行权限判断，具体的权限控制由专门的鉴权管理器处理
         if (StrUtil.isEmpty(token)) {
             return chain.filter(exchange);
         }

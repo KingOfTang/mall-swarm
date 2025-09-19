@@ -40,11 +40,31 @@ import reactor.core.publisher.Mono;
 @Configuration
 @EnableWebFluxSecurity
 public class ResourceServerConfig {
+    /**
+     * 授权管理器，用于处理用户权限验证逻辑
+     */
     private final AuthorizationManager authorizationManager;
+
+    /**
+     * 忽略URL配置，存储不需要进行权限验证的URL路径配置
+     */
     private final IgnoreUrlsConfig ignoreUrlsConfig;
+
+    /**
+     * RESTful访问拒绝处理器，用于处理用户访问被拒绝时的响应处理
+     */
     private final RestfulAccessDeniedHandler restfulAccessDeniedHandler;
+
+    /**
+     * REST认证入口点，用于处理用户未认证时的响应处理
+     */
     private final RestAuthenticationEntryPoint restAuthenticationEntryPoint;
+
+    /**
+     * 忽略URL的JWT过滤器，用于移除指定URL路径中的JWT令牌
+     */
     private final IgnoreUrlsRemoveJwtFilter ignoreUrlsRemoveJwtFilter;
+
 
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {

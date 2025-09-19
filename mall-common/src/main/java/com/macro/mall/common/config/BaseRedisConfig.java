@@ -22,7 +22,12 @@ import java.time.Duration;
 
 /**
  * Redis基础配置
- * Created by macro on 2020/6/19.
+ * 这段代码是Spring Boot中Redis的配置类，主要功能包括：
+ *
+ * 1. **RedisTemplate配置**：定义了键值对的序列化方式，使用String序列化键，Jackson JSON序列化值。
+ * 2. **Redis序列化器配置**：配置Jackson2JsonRedisSerializer，支持对象与JSON互转，并开启默认类型推断。
+ * 3. **Redis缓存管理器配置**：设置缓存有效期为1天，使用自定义序列化器。
+ * 4. **Redis服务注入**：提供RedisService实例。
  */
 public class BaseRedisConfig {
 
