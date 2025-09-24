@@ -38,7 +38,8 @@
                              targetProject="mall-mbg\src\main\java"/>
         <!--生成全部表tableName设为%-->
 <!--        <table tableName="%">-->
-        <table tableName="dev_test_log">
+<!--        <table tableName="dev_test_log">-->
+        <table tableName="oms_order">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
     </context>
