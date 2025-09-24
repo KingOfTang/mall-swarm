@@ -58,11 +58,11 @@
                 <!-- 该插件用于重新打包可执行的 jar 或 war 文件，以便它们可以作为独立应用程序运行 -->
             </plugin>
             <!-- Docker Maven 插件 -->
-            <plugin>
-                <groupId>io.fabric8</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <!-- 该插件用于与 Docker 集成，允许构建过程管理 Docker 镜像和容器 -->
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>io.fabric8</groupId>-->
+<!--                <artifactId>docker-maven-plugin</artifactId>-->
+<!--                &lt;!&ndash; 该插件用于与 Docker 集成，允许构建过程管理 Docker 镜像和容器 &ndash;&gt;-->
+<!--            </plugin>-->
         </plugins>
     </build>
 
